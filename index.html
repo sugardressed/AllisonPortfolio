@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allison Ramirez – Art Portfolio</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&amp;family=Patrick+Hand&amp;family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { height: 100%; margin: 0; }
+
+    /* Comic halftone dot pattern */
+    .halftone-bg {
+      background-image: radial-gradient(circle, rgba(255,107,107,0.08) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+
+    /* Speech bubble */
+    .speech-bubble {
+      position: relative;
+      background: #fff;
+      border: 3px solid #222;
+      border-radius: 20px;
+      padding: 16px 22px;
+    }
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -18px;
+      left: 40px;
+      width: 0; height: 0;
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-top: 18px solid #222;
+    }
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -13px;
+      left: 43px;
+      width: 0; height: 0;
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-top: 15px solid #fff;
+      z-index: 1;
+    }
+
+    /* Comic panel border */
+    .comic-panel {
+      border: 3px solid #222;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .comic-panel:hover {
+      transform: rotate(-1deg) scale(1.03);
+      box-shadow: 6px 6px 0 #222;
+    }
+
+    /* Starburst badge */
+    .starburst {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px; height: 80px;
+      background: #FFD93D;
+      clip-path: polygon(50% 0%, 61% 18%, 80% 10%, 74% 30%, 95% 35%, 82% 50%, 95% 65%, 74% 70%, 80% 90%, 61% 82%, 50% 100%, 39% 82%, 20% 90%, 26% 70%, 5% 65%, 18% 50%, 5% 35%, 26% 30%, 20% 10%, 39% 18%);
+      font-family: 'Bangers', cursive;
+      font-size: 14px;
+      color: #222;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    /* Washi tape decoration */
+    .washi-tape {
+      position: absolute;
+      width: 120px;
+      height: 28px;
+      opacity: 0.85;
+      z-index: 10;
+    }
+    .washi-tape-1 { background: repeating-linear-gradient(45deg, #FF6B6B, #FF6B6B 4px, #ff8a8a 4px, #ff8a8a 8px); transform: rotate(-8deg); top: -12px; left: 20px; }
+    .washi-tape-2 { background: repeating-linear-gradient(-45deg, #4ECDC4, #4ECDC4 4px, #6ed8d1 4px, #6ed8d1 8px); transform: rotate(5deg); top: -10px; right: 15px; }
+    .washi-tape-3 { background: repeating-linear-gradient(45deg, #FFD93D, #FFD93D 4px, #ffe16a 4px, #ffe16a 8px); transform: rotate(-3deg); top: -14px; left: 50%; margin-left: -60px; }
+
+    /* Floating doodles animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(5deg); }
+    }
+    @keyframes floatAlt {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(-4deg); }
+    }
+    .float-anim { animation: float 4s ease-in-out infinite; }
+    .float-anim-alt { animation: floatAlt 5s ease-in-out infinite; }
+    .float-anim-slow { animation: float 6s ease-in-out infinite; }
+
+    /* Gallery grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    @media (max-width: 640px) {
+      .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
+    }
+
+    /* Lightbox */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lightbox-overlay.active { display: flex; }
+
+    /* Nav pill */
+    .nav-pill {
+      border: 2px solid #222;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-family: 'Bangers', cursive;
+      font-size: 15px;
+      letter-spacing: 1px;
+      color: #222;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .nav-pill:hover, .nav-pill:focus {
+      background: #FFD93D;
+      transform: translateY(-2px);
+    }
+
+    /* Section entrance */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in { animation: slideUp 0.7s ease-out forwards; }
+    .delay-1 { animation-delay: 0.15s; opacity: 0; }
+    .delay-2 { animation-delay: 0.3s; opacity: 0; }
+    .delay-3 { animation-delay: 0.45s; opacity: 0; }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #FFF5F5; }
+    ::-webkit-scrollbar-thumb { background: #FF6B6B; border-radius: 10px; border: 2px solid #FFF5F5; }
+
+    /* Video placeholder */
+    .video-placeholder {
+      border: 3px dashed #aaa;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      cursor: pointer;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .video-placeholder:hover {
+      border-color: #FF6B6B;
+      background: rgba(255,107,107,0.04);
+    }
+
+    /* Gallery placeholder card */
+    .gallery-placeholder {
+      aspect-ratio: 1;
+      border: 3px dashed #ccc;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s;
+    }
+    .gallery-placeholder:hover {
+      border-color: #4ECDC4;
+      background: rgba(78,205,196,0.06);
+      transform: scale(1.03);
+    }
+
+    /* Skill tag */
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border: 2px solid #222;
+      border-radius: 999px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full overflow-auto" style="background: #FFF5F5;">
+  <div id="app-wrapper" class="w-full halftone-bg" style="min-height: 100%;"><!-- Floating Doodle SVGs -->
+   <div class="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden" style="z-index:0;">
+    <svg class="float-anim absolute" style="top:8%;left:5%;opacity:0.12;" width="60" height="60" viewbox="0 0 60 60">
+     <path d="M30 5 L35 25 L55 30 L35 35 L30 55 L25 35 L5 30 L25 25 Z" fill="#FF6B6B" />
+    </svg>
+    <svg class="float-anim-alt absolute" style="top:20%;right:8%;opacity:0.1;" width="50" height="50" viewbox="0 0 50 50">
+     <circle cx="25" cy="25" r="22" fill="none" stroke="#4ECDC4" stroke-width="3" stroke-dasharray="8 6" />
+    </svg>
+    <svg class="float-anim-slow absolute" style="top:55%;left:3%;opacity:0.1;" width="44" height="44" viewbox="0 0 44 44">
+     <rect x="6" y="6" width="32" height="32" rx="4" fill="none" stroke="#FFD93D" stroke-width="3" transform="rotate(15 22 22)" />
+    </svg>
+    <svg class="float-anim absolute" style="top:70%;right:5%;opacity:0.1;" width="48" height="48" viewbox="0 0 48 48">
+     <polygon points="24,4 28,18 44,18 31,27 35,42 24,33 13,42 17,27 4,18 20,18" fill="none" stroke="#FF6B6B" stroke-width="2.5" />
+    </svg>
+    <svg class="float-anim-alt absolute" style="top:40%;left:92%;opacity:0.08;" width="36" height="36" viewbox="0 0 36 36">
+     <path d="M18 2 C25 10, 34 14, 34 22 C34 30, 26 34, 18 34 C10 34, 2 30, 2 22 C2 14, 11 10, 18 2Z" fill="#4ECDC4" />
+    </svg>
+   </div><!-- NAVIGATION -->
+   <nav class="relative z-20 flex items-center justify-between px-6 py-4 md:px-10" style="background:rgba(255,245,245,0.9);backdrop-filter:blur(8px);">
+    <div style="font-family:'Bangers',cursive;font-size:24px;color:#FF6B6B;letter-spacing:2px;">
+     ✨ A.R.
+    </div>
+    <div class="flex gap-2 flex-wrap"><a href="#about" class="nav-pill">About</a> <a href="#gallery" class="nav-pill">Gallery</a> <a href="#video" class="nav-pill">Video</a>
+    </div>
+   </nav><!-- HERO SECTION -->
+   <header class="relative z-10 text-center px-6 pt-12 pb-16 md:pt-20 md:pb-24">
+    <div class="animate-in">
+     <div class="starburst mx-auto mb-6" style="width:100px;height:100px;font-size:16px;">
+      AGE 13!
+     </div>
+    </div>
+    <h1 id="el-hero-title" class="animate-in delay-1" style="font-family:'Bangers',cursive;font-size:clamp(2.8rem,8vw,5.5rem);color:#222;line-height:1.05;letter-spacing:3px;text-shadow:3px 3px 0 #FFD93D, 6px 6px 0 rgba(0,0,0,0.08);">Allison Ramirez</h1>
+    <p id="el-hero-subtitle" class="animate-in delay-2 mt-3" style="font-family:'Patrick Hand',cursive;font-size:clamp(1.1rem,3vw,1.6rem);color:#555;">Young Artist • Dreamer • Creator</p>
+    <div class="animate-in delay-3 mt-8 max-w-md mx-auto">
+     <div class="speech-bubble">
+      <p id="el-hero-tagline" style="font-family:'Patrick Hand',cursive;font-size:1.15rem;color:#333;">Welcome to my creative world! 🎨</p>
+     </div>
+    </div><!-- Decorative pencil SVG -->
+    <svg class="float-anim-alt mx-auto mt-8" width="120" height="30" viewbox="0 0 120 30" style="opacity:0.6;"><rect x="20" y="8" width="80" height="14" rx="2" fill="#FFD93D" stroke="#222" stroke-width="2" /> <polygon points="100,8 115,15 100,22" fill="#FFEAA7" stroke="#222" stroke-width="2" /> <rect x="10" y="8" width="14" height="14" rx="1" fill="#FF6B6B" stroke="#222" stroke-width="2" /> <line x1="115" y1="15" x2="118" y2="15" stroke="#222" stroke-width="2" />
+    </svg>
+   </header><!-- ABOUT SECTION -->
+   <section id="about" class="relative z-10 px-6 py-14 md:px-10">
+    <div class="max-w-3xl mx-auto">
+     <h2 id="el-about-heading" style="font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3rem);color:#222;letter-spacing:2px;">✏️ About Me</h2>
+     <div class="mt-6 flex flex-col md:flex-row gap-8 items-start">
+      <div class="flex-1">
+       <p id="el-about-text" style="font-family:'Patrick Hand',cursive;font-size:1.15rem;line-height:1.7;color:#444;">Hi! I'm Allison, a 13-year-old artist who loves turning blank pages into colorful worlds. From comic book characters to handmade crafts, I'm always creating something new. Drawing is my superpower, and every day I challenge myself to learn new techniques and tell stories through my art. I believe creativity has no limits — and neither do I! 🚀</p>
+       <div class="mt-6 flex flex-wrap gap-3"><span class="skill-tag" style="background:#FFE8E8;">🖊️ Comics</span> <span class="skill-tag" style="background:#E8FFF5;">✏️ Drawing</span> <span class="skill-tag" style="background:#FFF8E1;">✂️ Crafts</span> <span class="skill-tag" style="background:#EDE8FF;">🎨 Painting</span> <span class="skill-tag" style="background:#E8F4FF;">💡 Imagination</span>
+       </div>
+      </div><!-- Mini comic panel avatar -->
+      <div class="comic-panel flex-shrink-0" style="width:180px;height:220px;background:linear-gradient(135deg,#FFD93D 0%,#FF6B6B 100%);display:flex;align-items:center;justify-content:center;">
+       <div style="text-align:center;">
+        <div style="font-size:72px;">
+         👩‍🎨
+        </div>
+        <div style="font-family:'Bangers',cursive;font-size:18px;color:#222;margin-top:4px;">
+         That's me!
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- GALLERY SECTION -->
+   <section id="gallery" class="relative z-10 px-6 py-14 md:px-10">
+    <div class="max-w-5xl mx-auto">
+     <div class="flex items-center gap-4 flex-wrap">
+      <h2 id="el-gallery-heading" style="font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3rem);color:#222;letter-spacing:2px;">🖼️ My Art Gallery</h2>
+      <div class="starburst float-anim" style="width:64px;height:64px;font-size:11px;">
+       WOW!
+      </div>
+     </div>
+     <p class="mt-2" style="font-family:'Patrick Hand',cursive;font-size:1.1rem;color:#666;">Click on any artwork to see it up close!</p>
+     <div class="gallery-grid mt-8" id="gallery-container"><!-- 8 placeholder gallery slots -->
+     </div>
+    </div>
+   </section><!-- VIDEO SECTION -->
+   <section id="video" class="relative z-10 px-6 py-14 md:px-10">
+    <div class="max-w-3xl mx-auto">
+     <h2 id="el-video-heading" style="font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3rem);color:#222;letter-spacing:2px;">🎬 Watch My Story</h2>
+     <p class="mt-2 mb-6" style="font-family:'Patrick Hand',cursive;font-size:1.1rem;color:#666;">A little intro about me and my art journey!</p>
+     <div class="relative">
+      <div class="washi-tape washi-tape-1"></div>
+      <div class="washi-tape washi-tape-2"></div>
+      <div class="comic-panel" style="background:#fff;">
+       <div id="video-area" class="video-placeholder" style="min-height:340px;"><i data-lucide="video" style="width:56px;height:56px;color:#bbb;"></i>
+        <p style="font-family:'Patrick Hand',cursive;font-size:1.2rem;color:#999;margin-top:12px;">Your intro video goes here</p>
+        <p style="font-family:'Quicksand',sans-serif;font-size:0.85rem;color:#bbb;margin-top:4px;">Paste a YouTube or video embed link</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- FOOTER -->
+   <footer class="relative z-10 text-center px-6 py-10" style="border-top:3px dashed #FFD93D;">
+    <p id="el-footer-text" style="font-family:'Patrick Hand',cursive;font-size:1.1rem;color:#888;">Made with ♥ by Allison Ramirez</p>
+    <div class="flex justify-center gap-3 mt-4">
+     <svg width="20" height="20" viewbox="0 0 20 20" style="opacity:0.3;">
+      <path d="M10 1 L12 7 L18 7 L13 11 L15 17 L10 13 L5 17 L7 11 L2 7 L8 7 Z" fill="#FF6B6B" />
+     </svg>
+     <svg width="20" height="20" viewbox="0 0 20 20" style="opacity:0.3;">
+      <path d="M10 1 L12 7 L18 7 L13 11 L15 17 L10 13 L5 17 L7 11 L2 7 L8 7 Z" fill="#4ECDC4" />
+     </svg>
+     <svg width="20" height="20" viewbox="0 0 20 20" style="opacity:0.3;">
+      <path d="M10 1 L12 7 L18 7 L13 11 L15 17 L10 13 L5 17 L7 11 L2 7 L8 7 Z" fill="#FFD93D" />
+     </svg>
+    </div>
+   </footer><!-- LIGHTBOX -->
+   <div id="lightbox" class="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Artwork viewer"><button id="lightbox-close" style="position:absolute;top:20px;right:20px;background:#fff;border:3px solid #222;border-radius:50%;width:44px;height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Bangers',cursive;font-size:20px;z-index:1001;" aria-label="Close">✕</button>
+    <div id="lightbox-content" style="max-width:90%;max-height:85%;display:flex;align-items:center;justify-content:center;">
+     <div id="lightbox-inner" style="background:#fff;border:4px solid #222;border-radius:16px;padding:16px;text-align:center;">
+      <p style="font-family:'Patrick Hand',cursive;font-size:1.2rem;color:#666;">Artwork preview</p>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Gallery artwork slots with fun placeholder content
+    const gallerySlots = [
+      { title: 'Artwork 1', emoji: '🎨', bg: 'linear-gradient(135deg,#FF6B6B,#FF8E8E)' },
+      { title: 'Artwork 2', emoji: '✏️', bg: 'linear-gradient(135deg,#4ECDC4,#7EDDD6)' },
+      { title: 'Artwork 3', emoji: '🖌️', bg: 'linear-gradient(135deg,#FFD93D,#FFE57A)' },
+      { title: 'Artwork 4', emoji: '🌟', bg: 'linear-gradient(135deg,#A78BFA,#C4B5FD)' },
+      { title: 'Artwork 5', emoji: '🦋', bg: 'linear-gradient(135deg,#F472B6,#F9A8D4)' },
+      { title: 'Artwork 6', emoji: '🌈', bg: 'linear-gradient(135deg,#34D399,#6EE7B7)' },
+      { title: 'Artwork 7', emoji: '⭐', bg: 'linear-gradient(135deg,#FB923C,#FDBA74)' },
+      { title: 'Artwork 8', emoji: '🎭', bg: 'linear-gradient(135deg,#60A5FA,#93C5FD)' },
+    ];
+
+    function buildGallery() {
+      const container = document.getElementById('gallery-container');
+      container.innerHTML = '';
+      gallerySlots.forEach((slot, i) => {
+        const card = document.createElement('div');
+        card.className = 'comic-panel';
+        card.style.position = 'relative';
+        card.innerHTML = `
+          <div style="aspect-ratio:1;background:${slot.bg};display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;" data-index="${i}">
+            <span style="font-size:48px;">${slot.emoji}</span>
+            <span style="font-family:'Patrick Hand',cursive;font-size:1rem;color:#222;margin-top:8px;opacity:0.7;">${slot.title}</span>
+            <span style="font-family:'Quicksand',sans-serif;font-size:0.75rem;color:#222;opacity:0.4;margin-top:2px;">Click to preview</span>
+          </div>
+        `;
+        card.addEventListener('click', () => openLightbox(slot));
+        container.appendChild(card);
+      });
+    }
+
+    // Lightbox
+    function openLightbox(slot) {
+      const overlay = document.getElementById('lightbox');
+      const inner = document.getElementById('lightbox-inner');
+      inner.innerHTML = `
+        <div style="width:min(500px,80vw);aspect-ratio:1;background:${slot.bg};border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+          <span style="font-size:80px;">${slot.emoji}</span>
+          <span style="font-family:'Bangers',cursive;font-size:1.6rem;color:#222;margin-top:12px;letter-spacing:1px;">${slot.title}</span>
+          <span style="font-family:'Patrick Hand',cursive;font-size:1rem;color:#333;opacity:0.6;margin-top:4px;">Your artwork will go here</span>
+        </div>
+      `;
+      overlay.classList.add('active');
+    }
+
+    document.getElementById('lightbox-close').addEventListener('click', () => {
+      document.getElementById('lightbox').classList.remove('active');
+    });
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        document.getElementById('lightbox').classList.remove('active');
+      }
+    });
+
+    // Smooth scroll for nav
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Build gallery on load
+    buildGallery();
+
+    // Initialize icons
+    lucide.createIcons();
+
+    // --- Element SDK ---
+    const defaultConfig = {
+      hero_title: 'Allison Ramirez',
+      hero_subtitle: 'Young Artist • Dreamer • Creator',
+      hero_tagline: 'Welcome to my creative world! 🎨',
+      about_heading: '✏️ About Me',
+      about_text: "Hi! I'm Allison, a 13-year-old artist who loves turning blank pages into colorful worlds. From comic book characters to handmade crafts, I'm always creating something new. Drawing is my superpower, and every day I challenge myself to learn new techniques and tell stories through my art. I believe creativity has no limits — and neither do I! 🚀",
+      gallery_heading: '🖼️ My Art Gallery',
+      video_heading: '🎬 Watch My Story',
+      footer_text: 'Made with ♥ by Allison Ramirez',
+      background_color: '#FFF5F5',
+      surface_color: '#FFFFFF',
+      text_color: '#222222',
+      primary_action_color: '#FF6B6B',
+      secondary_action_color: '#4ECDC4',
+      font_family: 'Bangers',
+      font_size: 16
+    };
+
+    function applyConfig(config) {
+      const c = key => config[key] || defaultConfig[key];
+
+      // Text content
+      document.getElementById('el-hero-title').textContent = c('hero_title');
+      document.getElementById('el-hero-subtitle').textContent = c('hero_subtitle');
+      document.getElementById('el-hero-tagline').textContent = c('hero_tagline');
+      document.getElementById('el-about-heading').textContent = c('about_heading');
+      document.getElementById('el-about-text').textContent = c('about_text');
+      document.getElementById('el-gallery-heading').textContent = c('gallery_heading');
+      document.getElementById('el-video-heading').textContent = c('video_heading');
+      document.getElementById('el-footer-text').textContent = c('footer_text');
+
+      // Colors
+      const bg = c('background_color');
+      const surface = c('surface_color');
+      const text = c('text_color');
+      const primary = c('primary_action_color');
+      const secondary = c('secondary_action_color');
+
+      document.body.style.background = bg;
+      document.getElementById('app-wrapper').style.background = bg;
+
+      // Title text shadow uses primary action color
+      document.getElementById('el-hero-title').style.textShadow = `3px 3px 0 ${c('primary_action_color')}88, 6px 6px 0 rgba(0,0,0,0.08)`;
+      document.getElementById('el-hero-title').style.color = text;
+      document.getElementById('el-hero-subtitle').style.color = text + 'aa';
+      document.getElementById('el-about-heading').style.color = text;
+      document.getElementById('el-about-text').style.color = text + 'cc';
+      document.getElementById('el-gallery-heading').style.color = text;
+      document.getElementById('el-video-heading').style.color = text;
+      document.getElementById('el-footer-text').style.color = text + '88';
+
+      // Speech bubble surface
+      document.querySelector('.speech-bubble').style.background = surface;
+      document.getElementById('el-hero-tagline').style.color = text + 'dd';
+
+      // Nav pills border color
+      document.querySelectorAll('.nav-pill').forEach(p => {
+        p.style.borderColor = text;
+        p.style.color = text;
+      });
+
+      // Font
+      const customFont = c('font_family');
+      const titleStack = `${customFont}, 'Bangers', cursive`;
+      const bodyStack = `${customFont}, 'Patrick Hand', cursive`;
+
+      document.getElementById('el-hero-title').style.fontFamily = titleStack;
+      document.getElementById('el-hero-subtitle').style.fontFamily = bodyStack;
+      document.getElementById('el-hero-tagline').style.fontFamily = bodyStack;
+      document.getElementById('el-about-heading').style.fontFamily = titleStack;
+      document.getElementById('el-about-text').style.fontFamily = bodyStack;
+      document.getElementById('el-gallery-heading').style.fontFamily = titleStack;
+      document.getElementById('el-video-heading').style.fontFamily = titleStack;
+      document.getElementById('el-footer-text').style.fontFamily = bodyStack;
+
+      // Font size
+      const baseSize = c('font_size');
+      document.getElementById('el-hero-subtitle').style.fontSize = `${baseSize * 1.2}px`;
+      document.getElementById('el-hero-tagline').style.fontSize = `${baseSize * 1.1}px`;
+      document.getElementById('el-about-text').style.fontSize = `${baseSize * 1.1}px`;
+      document.getElementById('el-footer-text').style.fontSize = `${baseSize * 1.05}px`;
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          applyConfig(config);
+        },
+        mapToCapabilities: (config) => {
+          const c = key => config[key] || defaultConfig[key];
+          function colorMutable(key) {
+            return {
+              get: () => c(key),
+              set: (v) => { config[key] = v; window.elementSdk.setConfig({ [key]: v }); }
+            };
+          }
+          return {
+            recolorables: [
+              colorMutable('background_color'),
+              colorMutable('surface_color'),
+              colorMutable('text_color'),
+              colorMutable('primary_action_color'),
+              colorMutable('secondary_action_color'),
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => c('font_family'),
+              set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+            },
+            fontSizeable: {
+              get: () => c('font_size'),
+              set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+            }
+          };
+        },
+        mapToEditPanelValues: (config) => {
+          const c = key => config[key] || defaultConfig[key];
+          return new Map([
+            ['hero_title', c('hero_title')],
+            ['hero_subtitle', c('hero_subtitle')],
+            ['hero_tagline', c('hero_tagline')],
+            ['about_heading', c('about_heading')],
+            ['about_text', c('about_text')],
+            ['gallery_heading', c('gallery_heading')],
+            ['video_heading', c('video_heading')],
+            ['footer_text', c('footer_text')],
+          ]);
+        }
+      });
+    }
+
+    // Apply defaults
+    applyConfig(defaultConfig);
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ded3187b5a6e9e3',t:'MTc3MzkzMDgxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
