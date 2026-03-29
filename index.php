@@ -106,8 +106,8 @@ include __DIR__ . '/layout/header.php';
 <!-- VIDEO SECTION -->
 <section id="video" class="relative z-10 px-6 py-14 md:px-10">
     <div class="max-w-3xl mx-auto">
-     <h2 id="el-video-heading" style="font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3rem);color:#222;letter-spacing:2px;">🎬 Watch My Story</h2>
-     <p class="mt-2 mb-6" style="font-family:'Patrick Hand',cursive;font-size:1.1rem;color:#666;">A little intro about me and my art journey!</p>
+     <h2 id="el-video-heading" style="font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3rem);color:#222;letter-spacing:2px;">🎬 Artist Statement</h2>
+     <br>
      <div class="relative">
       <div class="washi-tape washi-tape-1"></div>
       <div class="washi-tape washi-tape-2"></div>
@@ -122,7 +122,7 @@ include __DIR__ . '/layout/header.php';
     preload="metadata"
     poster="./assets/images/profilePic3.png"
   >
-    <source src="./assets/videos/AllisonIntroVideo.mp4" type="video/mp4">
+    <source src="./assets/videos/AllisonVideo.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>

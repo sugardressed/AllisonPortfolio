@@ -1,13 +1,13 @@
 // Gallery data
 const jukiesGallery = [
-  { title: 'Artwork 1', image: './assets/images/DigitalProjects/Jukies/jukies1.png', bg: 'linear-gradient(135deg,#FF6B6B,#FF8E8E)' },
-  { title: 'Artwork 2', image: './assets/images/DigitalProjects/Jukies/jukies2.png', bg: 'linear-gradient(135deg,#4ECDC4,#7EDDD6)' },
-  { title: 'Artwork 3', image: './assets/images/DigitalProjects/Jukies/jukies9.png', bg: 'linear-gradient(135deg,#FFD93D,#FFE57A)' },
-  { title: 'Artwork 4', image: './assets/images/DigitalProjects/Jukies/jukies4.png', bg: 'linear-gradient(135deg,#A78BFA,#C4B5FD)' },
-  { title: 'Artwork 5', image: './assets/images/DigitalProjects/Jukies/jukies5.png', bg: 'linear-gradient(135deg,#F472B6,#F9A8D4)' },
-  { title: 'Artwork 6', image: './assets/images/DigitalProjects/Jukies/jukies6.png', bg: 'linear-gradient(135deg,#34D399,#6EE7B7)' },
-  { title: 'Artwork 7', image: './assets/images/DigitalProjects/Jukies/jukies7.png', bg: 'linear-gradient(135deg,#FB923C,#FDBA74)' },
-  { title: 'Artwork 8', image: './assets/images/DigitalProjects/Jukies/jukies8.png', bg: 'linear-gradient(135deg,#60A5FA,#93C5FD)' }
+  { title: 'Store Front', image: './assets/images/DigitalProjects/Jukies/jukies1.png', bg: 'linear-gradient(135deg,#FF6B6B,#FF8E8E)' },
+  { title: 'Backwall Funkos', image: './assets/images/DigitalProjects/Jukies/jukies2.png', bg: 'linear-gradient(135deg,#4ECDC4,#7EDDD6)' },
+  { title: 'T-shirt Details', image: './assets/images/DigitalProjects/Jukies/jukies9.png', bg: 'linear-gradient(135deg,#FFD93D,#FFE57A)' },
+  { title: 'Counter with Album Art', image: './assets/images/DigitalProjects/Jukies/jukies4.png', bg: 'linear-gradient(135deg,#A78BFA,#C4B5FD)' },
+  { title: 'Album Art Wall', image: './assets/images/DigitalProjects/Jukies/jukies5.png', bg: 'linear-gradient(135deg,#F472B6,#F9A8D4)' },
+  { title: 'Jukebox Details', image: './assets/images/DigitalProjects/Jukies/jukies6.png', bg: 'linear-gradient(135deg,#34D399,#6EE7B7)' },
+  { title: 'Angle View', image: './assets/images/DigitalProjects/Jukies/jukies7.png', bg: 'linear-gradient(135deg,#FB923C,#FDBA74)' },
+  { title: 'Layout', image: './assets/images/DigitalProjects/Jukies/jukies8.png', bg: 'linear-gradient(135deg,#60A5FA,#93C5FD)' }
 ];
 
 const illustrationGallery = [
@@ -22,7 +22,10 @@ const illustrationGallery = [
   { title: 'Sketch 9', image: './assets/images/Illustration/Illustration9.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
   { title: 'Sketch 10', image: './assets/images/Illustration/Illustration10.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
   { title: 'Sketch 11', image: './assets/images/Illustration/Illustration11.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
-  { title: 'Sketch 12', image: './assets/images/Illustration/Illustration12.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' }
+  { title: 'Sketch 12', image: './assets/images/Illustration/Illustration12.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 13', image: './assets/images/Illustration/Illustration13.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 14', image: './assets/images/Illustration/Illustration14.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 15', image: './assets/images/Illustration/Illustration15.png', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' }
 ];
 const photographyGallery = [
   { title: 'Photo 1', image: './assets/images/Photography/photo1.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
@@ -39,11 +42,11 @@ const photographyGallery = [
   { title: 'Photo 12', image: './assets/images/Photography/photo12.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' }
 ];
 const cosplayGallery = [
-  { title: 'cosplay 1', image: './assets/images/Cosplay/cosplay1.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
-  { title: 'cosplay 2', image: './assets/images/Cosplay/cosplay2.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
-  { title: 'cosplay 3', image: './assets/images/Cosplay/cosplay3.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
-  { title: 'cosplay 4', image: './assets/images/Cosplay/cosplay4.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
-  { title: 'cosplay 5', image: './assets/images/Cosplay/cosplay5.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' }
+  { title: '', image: './assets/images/Cosplay/cosplay1.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: '', image: './assets/images/Cosplay/cosplay2.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: '', image: './assets/images/Cosplay/cosplay3.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: '', image: './assets/images/Cosplay/cosplay4.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: '', image: './assets/images/Cosplay/cosplay5.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' }
 ];
 
 // Reusable gallery builder
@@ -256,7 +259,7 @@ buildGallery('gallery-container-cosplay', cosplayGallery);
       about_heading: '✏️ About Me',
       about_text: "Hi! I'm Allison, a 13-year-old artist who loves turning blank pages into colorful worlds. From comic book characters to handmade crafts, I'm always creating something new. Drawing is my superpower, and every day I challenge myself to learn new techniques and tell stories through my art. I believe creativity has no limits — and neither do I! 🚀",
       gallery_heading: '🖼️ My Art Gallery',
-      video_heading: '🎬 Watch My Story',
+      video_heading: '🎬 Artist Statement',
       footer_text: 'Made with ♥ by Allison Ramirez',
       // background_color: '#FFF5F5',
       surface_color: '#FFFFFF',
