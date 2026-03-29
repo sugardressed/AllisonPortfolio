@@ -50,6 +50,10 @@ const cosplayGallery = [
 ];
 
 // Reusable gallery builder
+let currentGallery = [];
+let currentIndex = 0;
+
+// Reusable gallery builder
 function buildGallery(containerId, galleryItems) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -131,103 +135,203 @@ function buildGallery(containerId, galleryItems) {
       </div>
     `;
 
-    card.addEventListener('click', () => openLightbox(slot));
+    card.addEventListener('click', () => openLightbox(galleryItems, i));
     container.appendChild(card);
   });
 }
 
-// Lightbox
-function openLightbox(slot) {
+// Open lightbox
+function openLightbox(galleryItems, index) {
+  currentGallery = galleryItems;
+  currentIndex = index;
+
   const overlay = document.getElementById('lightbox');
-  const inner = document.getElementById('lightbox-inner');
+  if (!overlay) return;
 
-  if (!overlay || !inner) return;
-
-  if (slot.image) {
-    inner.innerHTML = `
-      <div style="text-align:center;">
-        <img
-          src="${slot.image}"
-          alt="${slot.title}"
-          style="
-            max-width:min(90vw,900px);
-            max-height:75vh;
-            width:auto;
-            height:auto;
-            display:block;
-            border-radius:12px;
-            border:4px solid #222;
-            background:#fff;
-            box-shadow:0 10px 30px rgba(0,0,0,0.25);
-            margin:0 auto;
-          "
-        >
-        <div
-          style="
-            font-family:'Bangers',cursive;
-            font-size:1.6rem;
-            color:#fff;
-            margin-top:14px;
-            letter-spacing:1px;
-            text-align:center;
-          "
-        >
-          ${slot.title}
-        </div>
-      </div>
-    `;
-  } else {
-    inner.innerHTML = `
-      <div
-        style="
-          width:min(500px,80vw);
-          aspect-ratio:1;
-          background:${slot.bg};
-          border-radius:12px;
-          border:4px solid #222;
-          display:flex;
-          flex-direction:column;
-          align-items:center;
-          justify-content:center;
-          text-align:center;
-        "
-      >
-        <span style="font-size:80px;">${slot.emoji || '🎨'}</span>
-        <span
-          style="
-            font-family:'Bangers',cursive;
-            font-size:1.6rem;
-            color:#222;
-            margin-top:12px;
-            letter-spacing:1px;
-          "
-        >
-          ${slot.title}
-        </span>
-      </div>
-    `;
-  }
-
+  renderLightbox();
   overlay.classList.add('active');
 }
 
-// Lightbox close
+// Render current lightbox item
+function renderLightbox() {
+  const overlay = document.getElementById('lightbox');
+  const inner = document.getElementById('lightbox-inner');
+  if (!overlay || !inner || !currentGallery.length) return;
+
+  const slot = currentGallery[currentIndex];
+
+inner.innerHTML = `
+  <div style="position:relative; text-align:center; max-width:90vw; margin:0 auto;">
+    ${
+      slot.image
+        ? `
+          <img
+            src="${slot.image}"
+            alt="${slot.title}"
+            style="
+              max-width:min(90vw,900px);
+              max-height:75vh;
+              width:auto;
+              height:auto;
+              display:block;
+              border-radius:12px;
+              border:4px solid #222;
+              background:#fff;
+              box-shadow:0 10px 30px rgba(0,0,0,0.25);
+              margin:0 auto;
+            "
+          >
+        `
+        : `
+          <div
+            style="
+              width:min(500px,80vw);
+              aspect-ratio:1;
+              background:${slot.bg};
+              border-radius:12px;
+              border:4px solid #222;
+              display:flex;
+              flex-direction:column;
+              align-items:center;
+              justify-content:center;
+              text-align:center;
+              margin:0 auto;
+            "
+          >
+            <span style="font-size:80px;">${slot.emoji || '🎨'}</span>
+          </div>
+        `
+    }
+
+    <button
+      id="lightbox-prev"
+      aria-label="Previous image"
+      style="
+        position:absolute;
+        top:50%;
+        left:12px;
+        transform:translateY(-50%);
+        background:rgba(0,0,0,0.65);
+        color:#fff;
+        border:none;
+        border-radius:50%;
+        width:52px;
+        height:52px;
+        font-size:28px;
+        cursor:pointer;
+      "
+    >
+      ‹
+    </button>
+
+    <button
+      id="lightbox-next"
+      aria-label="Next image"
+      style="
+        position:absolute;
+        top:50%;
+        right:12px;
+        transform:translateY(-50%);
+        background:rgba(0,0,0,0.65);
+        color:#fff;
+        border:none;
+        border-radius:50%;
+        width:52px;
+        height:52px;
+        font-size:28px;
+        cursor:pointer;
+      "
+    >
+      ›
+    </button>
+
+    <div
+      style="
+        font-family:'Bangers',cursive;
+        font-size:1.6rem;
+        color:#fff;
+        margin-top:14px;
+        letter-spacing:1px;
+        text-align:center;
+      "
+    >
+      ${slot.title}
+    </div>
+  </div>
+`;
+
+  const prevBtn = document.getElementById('lightbox-prev');
+  const nextBtn = document.getElementById('lightbox-next');
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showPrevImage();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showNextImage();
+    });
+  }
+}
+
+// Previous image
+function showPrevImage() {
+  if (!currentGallery.length) return;
+  currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+  renderLightbox();
+}
+
+// Next image
+function showNextImage() {
+  if (!currentGallery.length) return;
+  currentIndex = (currentIndex + 1) % currentGallery.length;
+  renderLightbox();
+}
+
+// Close lightbox
+function closeLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox) {
+    lightbox.classList.remove('active');
+  }
+}
+
 const lightboxClose = document.getElementById('lightbox-close');
 const lightbox = document.getElementById('lightbox');
 
-if (lightboxClose && lightbox) {
-  lightboxClose.addEventListener('click', () => {
-    lightbox.classList.remove('active');
-  });
+if (lightboxClose) {
+  lightboxClose.addEventListener('click', closeLightbox);
 }
 
 if (lightbox) {
   lightbox.addEventListener('click', (e) => {
     if (e.target === e.currentTarget) {
-      lightbox.classList.remove('active');
+      closeLightbox();
     }
   });
 }
+
+// Keyboard support
+document.addEventListener('keydown', (e) => {
+  const lightbox = document.getElementById('lightbox');
+  if (!lightbox || !lightbox.classList.contains('active')) return;
+
+  if (e.key === 'Escape') {
+    closeLightbox();
+  }
+
+  if (e.key === 'ArrowLeft') {
+    showPrevImage();
+  }
+
+  if (e.key === 'ArrowRight') {
+    showNextImage();
+  }
+});
 
 // Build all galleries
 buildGallery('gallery-container-jukies', jukiesGallery);
