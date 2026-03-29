@@ -1,9 +1,32 @@
-body { box-sizing: border-box; }
-  html, body { height: 100%; margin: 0; }
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  background: transparent;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.65), rgba(255,255,255,0.65)),
+    url("../assets/images/Illustration/Illustration11.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: -1;
+}
+
 
     /* Comic halftone dot pattern */
     .halftone-bg {
-      background-image: radial-gradient(circle, rgba(255,107,107,0.08) 1px, transparent 1px);
+      background: transparent;
       background-size: 18px 18px;
     }
 
@@ -112,6 +135,66 @@ body { box-sizing: border-box; }
     }
     .lightbox-overlay.active { display: flex; }
 
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+#lightbox-image {
+  max-width: 90vw;
+  max-height: 78vh;
+  border-radius: 14px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+}
+
+#lightbox-title {
+  margin-top: 14px;
+  color: #fff;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+#lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 28px;
+  font-size: 36px;
+  line-height: 1;
+  cursor: pointer;
+
+  color: #222;              /* 👈 change this */
+  background: #ffffff;      /* bubble background */
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+#lightbox-close:hover {
+  background: #222;
+  color: #d56060;
+  transform: scale(1.05);
+}
+
+
+
     /* Nav pill */
     .nav-pill {
       border: 2px solid #222;
@@ -129,6 +212,8 @@ body { box-sizing: border-box; }
       background: #FFD93D;
       transform: translateY(-2px);
     }
+
+
 
     /* Section entrance */
     @keyframes slideUp {
@@ -162,7 +247,13 @@ body { box-sizing: border-box; }
       background: rgba(255,107,107,0.04);
     }
 
+    
+    
+    
     /* Gallery placeholder card */
+
+
+
     .gallery-placeholder {
       aspect-ratio: 1;
       border: 3px dashed #ccc;
@@ -192,4 +283,135 @@ body { box-sizing: border-box; }
       font-size: 16px;
     }
 
-  
+  // ZOOMING THATS ME PICTURE
+
+ .image-zoom-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.about-zoom-box {
+  width: 190px;
+  height: 220px;
+}
+
+.zoom-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.35s ease;
+  transform-origin: center center;
+  cursor: zoom-in;
+}
+
+.image-zoom-container:hover .zoom-img,
+.zoom-img.active {
+  transform: scale(1.35);
+}
+
+///GALLERY CARDS
+/// 
+.gallery-card {
+  overflow: hidden;
+}
+
+.gallery-art {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: #f6f6f6;
+}
+
+.gallery-art-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.gallery-art:hover .gallery-art-img {
+  transform: scale(1.08);
+}
+
+.gallery-art-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 12px;
+  background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.05));
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-art-title {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.gallery-art-preview {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.85);
+  margin-top: 2px;
+}
+//Gallery subtitles
+.gallery-subtitle {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.2rem;
+  color: #444;
+
+  display: inline-block;
+  padding: 6px 14px;
+  margin-top: 8px;
+
+  background: #fff7d6;
+  border: 2px solid #222;
+  border-radius: 12px;
+
+  box-shadow: 3px 3px 0 #222;
+
+  letter-spacing: 0.5px;
+}
+
+.gallery-subtitle, .aboutmeLink {
+  transform: rotate(-1deg);
+}
+
+.gallery-subtitle:hover, .aboutmeLink:hover{
+  transform: scale(1.03) rotate(-1deg);
+}
+
+// VIDEO CSS =============================================
+.video-container {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.portfolio-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+/* Optional: subtle hover effect */
+.video-container:hover {
+  transform: scale(1.01);
+  transition: transform 0.3s ease;
+}
+

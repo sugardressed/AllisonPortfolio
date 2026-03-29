@@ -1,0 +1,11 @@
+# Video files
+*.mp4
+*.mov
+*.avi
+*.wmv
+
+# Video folders
+assets/videos/
+
+# Optional
+assets/images/DigitalProjects/Jukies/

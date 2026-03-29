@@ -1,59 +1,239 @@
+// Gallery data
+const jukiesGallery = [
+  { title: 'Artwork 1', image: './assets/images/DigitalProjects/Jukies/jukies1.png', bg: 'linear-gradient(135deg,#FF6B6B,#FF8E8E)' },
+  { title: 'Artwork 2', image: './assets/images/DigitalProjects/Jukies/jukies2.png', bg: 'linear-gradient(135deg,#4ECDC4,#7EDDD6)' },
+  { title: 'Artwork 3', image: './assets/images/DigitalProjects/Jukies/jukies9.png', bg: 'linear-gradient(135deg,#FFD93D,#FFE57A)' },
+  { title: 'Artwork 4', image: './assets/images/DigitalProjects/Jukies/jukies4.png', bg: 'linear-gradient(135deg,#A78BFA,#C4B5FD)' },
+  { title: 'Artwork 5', image: './assets/images/DigitalProjects/Jukies/jukies5.png', bg: 'linear-gradient(135deg,#F472B6,#F9A8D4)' },
+  { title: 'Artwork 6', image: './assets/images/DigitalProjects/Jukies/jukies6.png', bg: 'linear-gradient(135deg,#34D399,#6EE7B7)' },
+  { title: 'Artwork 7', image: './assets/images/DigitalProjects/Jukies/jukies7.png', bg: 'linear-gradient(135deg,#FB923C,#FDBA74)' },
+  { title: 'Artwork 8', image: './assets/images/DigitalProjects/Jukies/jukies8.png', bg: 'linear-gradient(135deg,#60A5FA,#93C5FD)' }
+];
 
-    // Gallery artwork slots with fun placeholder content
-    const gallerySlots = [
-      { title: 'Artwork 1', emoji: '🎨', bg: 'linear-gradient(135deg,#FF6B6B,#FF8E8E)' },
-      { title: 'Artwork 2', emoji: '✏️', bg: 'linear-gradient(135deg,#4ECDC4,#7EDDD6)' },
-      { title: 'Artwork 3', emoji: '🖌️', bg: 'linear-gradient(135deg,#FFD93D,#FFE57A)' },
-      { title: 'Artwork 4', emoji: '🌟', bg: 'linear-gradient(135deg,#A78BFA,#C4B5FD)' },
-      { title: 'Artwork 5', emoji: '🦋', bg: 'linear-gradient(135deg,#F472B6,#F9A8D4)' },
-      { title: 'Artwork 6', emoji: '🌈', bg: 'linear-gradient(135deg,#34D399,#6EE7B7)' },
-      { title: 'Artwork 7', emoji: '⭐', bg: 'linear-gradient(135deg,#FB923C,#FDBA74)' },
-      { title: 'Artwork 8', emoji: '🎭', bg: 'linear-gradient(135deg,#60A5FA,#93C5FD)' },
-    ];
+const illustrationGallery = [
+  { title: 'Sketch 1', image: './assets/images/Illustration/Illustration1.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 2', image: './assets/images/Illustration/Illustration2.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 3', image: './assets/images/Illustration/Illustration3.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 4', image: './assets/images/Illustration/Illustration4.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 5', image: './assets/images/Illustration/Illustration5.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 6', image: './assets/images/Illustration/Illustration6.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 7', image: './assets/images/Illustration/Illustration7.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 8', image: './assets/images/Illustration/Illustration8.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 9', image: './assets/images/Illustration/Illustration9.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 10', image: './assets/images/Illustration/Illustration10.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 11', image: './assets/images/Illustration/Illustration11.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Sketch 12', image: './assets/images/Illustration/Illustration12.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' }
+];
+const photographyGallery = [
+  { title: 'Photo 1', image: './assets/images/Photography/photo1.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Photo 2', image: './assets/images/Photography/photo2.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Photo 3', image: './assets/images/Photography/photo3.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Photo 4', image: './assets/images/Photography/photo4.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Photo 5', image: './assets/images/Photography/photo5.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Photo 6', image: './assets/images/Photography/photo6.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Photo 7', image: './assets/images/Photography/photo7.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Photo 8', image: './assets/images/Photography/photo8.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Photo 9', image: './assets/images/Photography/photo9.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Photo 10', image: './assets/images/Photography/photo10.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Photo 11', image: './assets/images/Photography/photo11.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'Photo 12', image: './assets/images/Photography/photo12.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' }
+];
+const cosplayGallery = [
+  { title: 'cosplay 1', image: './assets/images/Cosplay/cosplay1.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'cosplay 2', image: './assets/images/Cosplay/cosplay2.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'cosplay 3', image: './assets/images/Cosplay/cosplay3.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'cosplay 4', image: './assets/images/Cosplay/cosplay4.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' },
+  { title: 'cosplay 5', image: './assets/images/Cosplay/cosplay5.jpg', bg: 'linear-gradient(135deg,#D9D9D9,#F2F2F2)' }
+];
 
-    function buildGallery() {
-      const container = document.getElementById('gallery-container');
-      container.innerHTML = '';
-      gallerySlots.forEach((slot, i) => {
-        const card = document.createElement('div');
-        card.className = 'comic-panel';
-        card.style.position = 'relative';
-        card.innerHTML = `
-          <div style="aspect-ratio:1;background:${slot.bg};display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;" data-index="${i}">
-            <span style="font-size:48px;">${slot.emoji}</span>
-            <span style="font-family:'Patrick Hand',cursive;font-size:1rem;color:#222;margin-top:8px;opacity:0.7;">${slot.title}</span>
-            <span style="font-family:'Quicksand',sans-serif;font-size:0.75rem;color:#222;opacity:0.4;margin-top:2px;">Click to preview</span>
-          </div>
-        `;
-        card.addEventListener('click', () => openLightbox(slot));
-        container.appendChild(card);
-      });
-    }
+// Reusable gallery builder
+function buildGallery(containerId, galleryItems) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
-    // Lightbox
-    function openLightbox(slot) {
-      const overlay = document.getElementById('lightbox');
-      const inner = document.getElementById('lightbox-inner');
-      inner.innerHTML = `
-        <div style="width:min(500px,80vw);aspect-ratio:1;background:${slot.bg};border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-          <span style="font-size:80px;">${slot.emoji}</span>
-          <span style="font-family:'Bangers',cursive;font-size:1.6rem;color:#222;margin-top:12px;letter-spacing:1px;">${slot.title}</span>
-          <span style="font-family:'Patrick Hand',cursive;font-size:1rem;color:#333;opacity:0.6;margin-top:4px;">Your artwork will go here</span>
-        </div>
+  container.innerHTML = '';
+
+  galleryItems.forEach((slot, i) => {
+    const card = document.createElement('div');
+    card.className = 'comic-panel';
+    card.style.position = 'relative';
+
+    const previewContent = slot.image
+      ? `
+        <img
+          src="${slot.image}"
+          alt="${slot.title}"
+          style="
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            display:block;
+          "
+        >
+      `
+      : `
+        <span style="font-size:48px;">${slot.emoji || '🎨'}</span>
       `;
-      overlay.classList.add('active');
+
+    card.innerHTML = `
+      <div
+        style="
+          aspect-ratio:1;
+          background:${slot.bg};
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          justify-content:center;
+          cursor:pointer;
+          overflow:hidden;
+          position:relative;
+        "
+        data-index="${i}"
+      >
+        ${previewContent}
+
+        <div
+          style="
+            position:absolute;
+            left:0;
+            right:0;
+            bottom:0;
+            padding:10px 8px;
+            background:linear-gradient(to top, rgba(0,0,0,0.68), rgba(0,0,0,0.12));
+            text-align:center;
+          "
+        >
+          <span
+            style="
+              display:block;
+              font-family:'Patrick Hand',cursive;
+              font-size:1rem;
+              color:#fff;
+            "
+          >
+            ${slot.title}
+          </span>
+          <span
+            style="
+              display:block;
+              font-family:'Quicksand',sans-serif;
+              font-size:0.75rem;
+              color:rgba(255,255,255,0.85);
+              margin-top:2px;
+            "
+          >
+            Click to preview
+          </span>
+        </div>
+      </div>
+    `;
+
+    card.addEventListener('click', () => openLightbox(slot));
+    container.appendChild(card);
+  });
+}
+
+// Lightbox
+function openLightbox(slot) {
+  const overlay = document.getElementById('lightbox');
+  const inner = document.getElementById('lightbox-inner');
+
+  if (!overlay || !inner) return;
+
+  if (slot.image) {
+    inner.innerHTML = `
+      <div style="text-align:center;">
+        <img
+          src="${slot.image}"
+          alt="${slot.title}"
+          style="
+            max-width:min(90vw,900px);
+            max-height:75vh;
+            width:auto;
+            height:auto;
+            display:block;
+            border-radius:12px;
+            border:4px solid #222;
+            background:#fff;
+            box-shadow:0 10px 30px rgba(0,0,0,0.25);
+            margin:0 auto;
+          "
+        >
+        <div
+          style="
+            font-family:'Bangers',cursive;
+            font-size:1.6rem;
+            color:#fff;
+            margin-top:14px;
+            letter-spacing:1px;
+            text-align:center;
+          "
+        >
+          ${slot.title}
+        </div>
+      </div>
+    `;
+  } else {
+    inner.innerHTML = `
+      <div
+        style="
+          width:min(500px,80vw);
+          aspect-ratio:1;
+          background:${slot.bg};
+          border-radius:12px;
+          border:4px solid #222;
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          justify-content:center;
+          text-align:center;
+        "
+      >
+        <span style="font-size:80px;">${slot.emoji || '🎨'}</span>
+        <span
+          style="
+            font-family:'Bangers',cursive;
+            font-size:1.6rem;
+            color:#222;
+            margin-top:12px;
+            letter-spacing:1px;
+          "
+        >
+          ${slot.title}
+        </span>
+      </div>
+    `;
+  }
+
+  overlay.classList.add('active');
+}
+
+// Lightbox close
+const lightboxClose = document.getElementById('lightbox-close');
+const lightbox = document.getElementById('lightbox');
+
+if (lightboxClose && lightbox) {
+  lightboxClose.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+  });
+}
+
+if (lightbox) {
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+      lightbox.classList.remove('active');
     }
+  });
+}
 
-    document.getElementById('lightbox-close').addEventListener('click', () => {
-      document.getElementById('lightbox').classList.remove('active');
-    });
-    document.getElementById('lightbox').addEventListener('click', (e) => {
-      if (e.target === e.currentTarget) {
-        document.getElementById('lightbox').classList.remove('active');
-      }
-    });
+// Build all galleries
+buildGallery('gallery-container-jukies', jukiesGallery);
+buildGallery('gallery-container-illustration', illustrationGallery);
+buildGallery('gallery-container-photography', photographyGallery);
+buildGallery('gallery-container-cosplay', cosplayGallery);
 
-    // Smooth scroll for nav
+
+// Smooth scroll for nav
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         e.preventDefault();
@@ -78,7 +258,7 @@
       gallery_heading: '🖼️ My Art Gallery',
       video_heading: '🎬 Watch My Story',
       footer_text: 'Made with ♥ by Allison Ramirez',
-      background_color: '#FFF5F5',
+      // background_color: '#FFF5F5',
       surface_color: '#FFFFFF',
       text_color: '#222222',
       primary_action_color: '#FF6B6B',
@@ -206,3 +386,19 @@
  
  
   (function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ded3187b5a6e9e3',t:'MTc3MzkzMDgxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+
+document.querySelectorAll('.zoom-img').forEach(img => {
+  img.addEventListener('click', function (e) {
+    e.stopPropagation();
+    this.classList.toggle('active');
+  });
+});
+
+
+// click anywhere else → remove zoom
+document.addEventListener('click', () => {
+  document.querySelectorAll('.zoom-img').forEach(img => {
+    img.classList.remove('active');
+  });
+});
+
