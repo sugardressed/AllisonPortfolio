@@ -385,7 +385,6 @@ body::before {
 }
 
 .gallery-art {
-  aspect-ratio: 1/1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -393,8 +392,15 @@ body::before {
   overflow: hidden;
   cursor: pointer;
   background: #f6f6f6;
+  min-height: 220px;
 }
 
+@supports (aspect-ratio: 1/1) {
+  .gallery-art {
+    aspect-ratio: 1/1;
+    min-height: 0;
+  }
+}
 .gallery-art-img {
   width: 100%;
   height: 100%;
@@ -413,23 +419,26 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 10px 12px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.05));
-  display: flex;
-  flex-direction: column;
+  padding: 10px 8px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.12));
+  text-align: center;
 }
 
 .gallery-art-title {
+  display: block;
   font-family: "Patrick Hand", cursive;
   font-size: 1rem;
   color: #fff;
+  text-align: center; /* optional but safe */
 }
 
 .gallery-art-preview {
+  display: block;
   font-family: "Quicksand", sans-serif;
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.85);
   margin-top: 2px;
+  text-align: center; /* optional but safe */
 }
 
 .gallery-subtitle {
@@ -454,6 +463,22 @@ body::before {
   transform: scale(1.03) rotate(-1deg);
 }
 
+.gallery-thumb {
+  position: relative;
+  width: 100%;
+  min-height: 220px; /* fallback for Safari */
+  background: #f6f6f6;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+}
+
+@supports (aspect-ratio: 1/1) {
+  .gallery-thumb {
+    aspect-ratio: 1/1;
+    min-height: 0;
+  }
+}
 .video-container {
   position: relative;
   width: 100%;
